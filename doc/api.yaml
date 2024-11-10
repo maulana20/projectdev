@@ -1,0 +1,480 @@
+openapi: 3.0.0
+servers: []
+info:
+  description: Reservation Ticket
+  version: 1.0.0-oas3
+  title: Reservation Ticket
+paths:
+  /api/transaction/{hosttohost_identifier}/search:
+    post:
+      tags:
+        - Transaction Ticket
+      summary: Search Schedule
+      operationId: SearchSchedule
+      parameters:
+        - $ref: '#/components/parameters/HostohostIdentifier'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/requestBodies/Search'
+      responses:
+        '200':
+          $ref: '#/components/responses/Schedule'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /api/transaction/{hosttohost_identifier}/fare:
+    post:
+      tags:
+        - Transaction Ticket
+      summary: Fare Detail
+      operationId: FareDetail
+      parameters:
+        - $ref: '#/components/parameters/HostohostIdentifier'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/requestBodies/Fare'
+      responses:
+        '200':
+          $ref: '#/components/responses/Fare'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /api/transaction/{hosttohost_identifier}/booking:
+    post:
+      tags:
+        - Transaction Ticket
+      summary: Booking Schedule
+      operationId: BookingSchedule
+      parameters:
+        - $ref: '#/components/parameters/HostohostIdentifier'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/requestBodies/Booking'
+      responses:
+        '200':
+          $ref: '#/components/responses/Booking'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /api/transaction/{hosttohost_identifier}/ticketing:
+    post:
+      tags:
+        - Transaction Ticket
+      summary: Issued Ticket
+      operationId: IssuedTicket
+      parameters:
+        - $ref: '#/components/parameters/HostohostIdentifier'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/requestBodies/Ticketing'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ticketing'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /api/transaction/{hosttohost_identifier}/cancel:
+    post:
+      tags:
+        - Transaction Ticket
+      summary: Cancel Booking
+      operationId: CancelBooking
+      parameters:
+        - $ref: '#/components/parameters/HostohostIdentifier'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/requestBodies/Cancel'
+      responses:
+        '200':
+          $ref: '#/components/responses/Cancel'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /api/manage/bookings:
+    get:
+      tags:
+        - Manage Ticket
+  /api/report/ticketings:
+    get:
+      tags:
+        - Report Ticket
+
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: Forbidden
+    Status:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: integer
+          enum: [0, 1]
+          description: |
+            1 is active, 0 is inactive
+          example: 1
+    Boolean:
+      type: boolean
+      example: true
+    Date:
+      type: string
+      format: date
+      example: "2022-08-17"
+    DateTime:
+      type: string
+      format: date-time
+      readOnly: true
+      example: "2022-08-17 00:13:28.464732"
+    Class:
+      type: object
+      properties:
+        label:
+          type: string
+          description: label of class in display
+          example: Y
+        value:
+          type: string
+          description: >
+            encode between route, code, name, segment (default=1), and value.
+            if direct_transit=1 for route, code, name, and segment use `##` as separate between transit.
+          example: EYIdja78hjh
+        seat:
+          type: integer
+          example: 9
+        status:
+          type: integer
+          enum: [0, 1]
+    Schedule:
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+          example: Boeing 737-8
+        name:
+          type: string
+          example: Lion Air
+        time_depart:
+          type: string
+          $ref: "#/components/schemas/DateTime"
+        time_arrive:
+          type: string
+          $ref: "#/components/schemas/DateTime"
+        direct_transit:
+          type: integer
+          enum: [0, 1]
+          description: >
+            1 is yes and 0 is no.
+            if there have transit, the condition direct_transit=1 it's mean must to choose one class.
+            direct_transit=0 it's mean we could do choose different class in transit.
+        classes:
+          type: array
+          items:
+            allOf:
+              - $ref: "#/components/schemas/Class"
+    Fare:
+      type: object
+      properties:
+        publish:
+          type: float
+          example: 100000
+        tax:
+          type: float
+          example: 10000
+        total:
+          type: float
+          example: 110000
+        nta:
+          type: float
+          example: 98000
+    Booking:
+      allOf:
+        - type: object
+          properties:
+            code:
+              type: string
+              example: XTGHFG
+            name:
+              type: string
+              example: Lion Air
+            time_limit:
+              $ref: "#/components/schemas/DateTime"
+            segment:
+              type: integer
+              example: 1
+        - $ref: "#/components/schemas/Fare"
+    Confirm:
+      properties:
+        confirm:
+          $ref: "#/components/schemas/Boolean"
+    Ticketing:
+      allOf:
+        - $ref: "#/components/schemas/Confirm"
+    Cancel:
+      allOf:
+        - $ref: "#/components/schemas/Confirm"
+
+  parameters:
+    HostohostIdentifier:
+      description: Hosttohost Identifier
+      in: path
+      name: hosttohost_identifier
+      required: true
+      schema:
+        enum: ["airasia", "lion"]
+
+  requestBodies:
+    Pax:
+      type: object
+      properties:
+        adult:
+          type: integer
+          example: 1
+        child:
+          type: integer
+        infant:
+          type: integer
+    Search:
+      allOf:
+        - type: object
+          properties:
+            origin:
+              type: string
+              example: CGK
+            destination:
+              type: string
+              example: JOG
+            type:
+              type: string
+              enum: ["OW", "RT"]
+            from_date:
+              type: string
+              $ref: "#/components/schemas/Date"
+            to_date:
+              type: string
+              $ref: "#/components/schemas/Date"
+        - $ref: "#/components/requestBodies/Pax"
+    Fare:
+      allOf:
+        - type: object
+          properties:
+            origin:
+              type: string
+              example: CGK
+            destination:
+              type: string
+              example: JOG
+            date:
+              type: string
+              $ref: "#/components/schemas/Date"
+            choices:
+              type: array
+              example: ["EYIdja78hjh"]
+        - $ref: "#/components/requestBodies/Pax"
+    Booking:
+      allOf:
+        - $ref: "#/components/requestBodies/Search"
+        - type: object
+          properties:
+            choices:
+              type: array
+              items:
+                properties:
+                  depart:
+                    type: array
+                    example: ["EYIdja78hjh"]
+    Code:
+      type: object
+      properties:
+        code:
+          type: string
+          example: XTGHFG
+    Ticketing:
+      allOf:
+        - $ref: "#/components/requestBodies/Code"
+    Cancel:
+      allOf:
+        - $ref: "#/components/requestBodies/Code"
+
+  responses:
+    Status:
+      description: No Content
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    NoContent:
+      description: No Content
+    BadRequest:
+      description: Bad Request
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            message: Unauthorized
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            message: Forbidden
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            message: Not found
+    UnprocessableContent:
+      description: Unprocessable Content. It's usually validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+            properties:
+              errors:
+                type: object
+                properties:
+                  type: string
+          example:
+            message: The given data was invalid.
+            errors:
+              example: The example field is required.
+    TooManyRequests:
+      description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            message: Too many requests
+    InternalServerError:
+      description: Internal Server Error
+    Schedule:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    route:
+                      type: string
+                      example: JKT-JOG
+                    date:
+                      type: string
+                      $ref: "#/components/schemas/Date"
+                    schedules:
+                      type: array
+                      items:
+                        allOf:
+                          - $ref: '#/components/schemas/Schedule'
+    Fare:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/Fare'
+    Booking:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/Booking'
+    Ticketing:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/Ticketing'
+    Cancel:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/Cancel'
