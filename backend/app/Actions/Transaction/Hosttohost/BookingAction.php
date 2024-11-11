@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Actions\Transaction\HostToHost;
+namespace App\Actions\Transaction\Hosttohost;
 
-use App\Helpers\HostToHostHelper;
+use App\Helpers\HosttohostHelper;
 
 class BookingAction
 {
     protected $service;
 
-    public function __construct(HostToHostHelper $hosthostHelper)
+    public function __construct(HosttohostHelper $hosthostHelper)
     {
         $service = $hosthostHelper->getService();
         $this->service = new $service();

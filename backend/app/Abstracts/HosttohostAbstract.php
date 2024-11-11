@@ -4,7 +4,7 @@ namespace App\Abstracts;
 
 use App\Traits\ClientDBTrait;
 
-abstract class HostToHostAbstract
+abstract class HosttohostAbstract
 {
     use ClientDBTrait;
 

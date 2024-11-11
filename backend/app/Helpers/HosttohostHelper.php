@@ -2,11 +2,15 @@
 
 namespace App\Helpers;
 
-class HostToHostHelper
+use App\Enums\Hosttohost\IdentifierEnum;
+use App\Services\Hosttohost\AirAsiaService;
+use App\Services\Hosttohost\LionService;
+
+class HosttohostHelper
 {
     protected const HOSTTOHOSTS = [
-        "airasia" => \App\Services\HostToHost\AirAsiaService::class,
-        "lion"    => \App\Services\HostToHost\LionService::class
+        IdentifierEnum::AIRASIA => AirAsiaService::class,
+        IdentifierEnum::LION    => LionService::class
     ];
 
     protected $hosttohost_identifier;

@@ -9,8 +9,13 @@ Route::group([
 ], function () {
     Route::group([
         "prefix"     => "{hosttohost_identifier}",
-        "whereIn"    => [ "hosttohost_identifier" => ["airasia", "lion"] ],
-        "controller" => \App\Http\Controllers\Api\Transaction\HostToHostController::class,
+        "whereIn"    => [
+            "hosttohost_identifier" => [
+                \App\Enums\Hosttohost\IdentifierEnum::AIRASIA,
+                \App\Enums\Hosttohost\IdentifierEnum::LION
+            ]
+        ],
+        "controller" => \App\Http\Controllers\Api\Transaction\HosttohostController::class,
     ], function () {
         Route::post("search", "search");
         Route::post("fare", "fare");
