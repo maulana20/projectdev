@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\HostToHost;
+namespace App\Services\Hosttohost;
 
-use App\Abstracts\HostToHostAbstract;
-use App\Contracts\HostToHostInterface;
+use App\Abstracts\HosttohostAbstract;
+use App\Contracts\HosttohostInterface;
 
-class AirAsiaService extends HostToHostAbstract implements HostToHostInterface
+class AirAsiaService extends HosttohostAbstract implements HosttohostInterface
 {
     public function createClient()
     {}

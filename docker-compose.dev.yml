@@ -22,7 +22,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    image: ticket-reservation/backend:local
+    image: projectdev/backend:local
     logging:
       options:
         max-size: "10m"
