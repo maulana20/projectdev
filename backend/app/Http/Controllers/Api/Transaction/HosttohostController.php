@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\Api\Transaction;
 
 use Illuminate\Http\Request;
-use App\Actions\Transaction\HostToHost\BookingAction;
-use App\Actions\Transaction\HostToHost\CancelAction;
-use App\Actions\Transaction\HostToHost\FareAction;
-use App\Actions\Transaction\HostToHost\SearchAction;
-use App\Actions\Transaction\HostToHost\TicketingAction;
+use App\Actions\Transaction\Hosttohost\BookingAction;
+use App\Actions\Transaction\Hosttohost\CancelAction;
+use App\Actions\Transaction\Hosttohost\FareAction;
+use App\Actions\Transaction\Hosttohost\SearchAction;
+use App\Actions\Transaction\Hosttohost\TicketingAction;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Transaction\HostToHost\BookingResource;
-use App\Http\Resources\Transaction\HostToHost\CancelResource;
-use App\Http\Resources\Transaction\HostToHost\FareResource;
-use App\Http\Resources\Transaction\HostToHost\SearchResource;
-use App\Http\Resources\Transaction\HostToHost\TicketingResource;
+use App\Http\Resources\Transaction\Hosttohost\BookingResource;
+use App\Http\Resources\Transaction\Hosttohost\CancelResource;
+use App\Http\Resources\Transaction\Hosttohost\FareResource;
+use App\Http\Resources\Transaction\Hosttohost\SearchResource;
+use App\Http\Resources\Transaction\Hosttohost\TicketingResource;
 
-class HostToHostController extends Controller
+class HosttohostController extends Controller
 {
     public function search(SearchAction $action, Request $request)
     {

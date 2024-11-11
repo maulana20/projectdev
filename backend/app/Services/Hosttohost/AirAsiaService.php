@@ -1,23 +1,25 @@
 <?php
 
-namespace App\Services\HostToHost;
+namespace App\Services\Hosttohost;
 
-use App\Abstracts\HostToHostAbstract;
-use App\Contracts\HostToHostInterface;
+use App\Abstracts\HosttohostAbstract;
+use App\Contracts\HosttohostInterface;
 
-class LionService extends HostToHostAbstract implements HostToHostInterface
+class AirAsiaService extends HosttohostAbstract implements HosttohostInterface
 {
-    public function createClient()
+    protected function createClient() : void
     {}
 
-    protected function loginClient($interface)
+    protected function loginClient($interface) : void
     {}
 
-    protected function logoutClient()
+    protected function logoutClient() : void
     {}
 
-    protected function isSessionTimeout()
-    {}
+    protected function isSessionTimeout() : bool
+    {
+        return true;
+    }
 
     public function search($request) : array
     {

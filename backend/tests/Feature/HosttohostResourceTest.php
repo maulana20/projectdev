@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class HostToHostTest extends TestCase
+class HosttohostResourceTest extends TestCase
 {
     public function test_check_search_resource(): void
     {
@@ -46,7 +46,7 @@ class HostToHostTest extends TestCase
             ]
         ];
         
-        $this->mock(\App\Actions\Transaction\HostToHost\SearchAction::class)
+        $this->mock(\App\Actions\Transaction\Hosttohost\SearchAction::class)
             ->shouldReceive("search")
             ->andReturn($data);
 
@@ -73,7 +73,7 @@ class HostToHostTest extends TestCase
             "nta"     => (float) 98000,
         ];
         
-        $this->mock(\App\Actions\Transaction\HostToHost\FareAction::class)
+        $this->mock(\App\Actions\Transaction\Hosttohost\FareAction::class)
             ->shouldReceive("fare")
             ->andReturn($data);
 
@@ -108,7 +108,7 @@ class HostToHostTest extends TestCase
             "nta"        => (float) 98000,
         ];
         
-        $this->mock(\App\Actions\Transaction\HostToHost\BookingAction::class)
+        $this->mock(\App\Actions\Transaction\Hosttohost\BookingAction::class)
             ->shouldReceive("booking")
             ->andReturn($data);
 
@@ -122,7 +122,7 @@ class HostToHostTest extends TestCase
 
         $data = [ "confirm" => true ];
         
-        $this->mock(\App\Actions\Transaction\HostToHost\TicketingAction::class)
+        $this->mock(\App\Actions\Transaction\Hosttohost\TicketingAction::class)
             ->shouldReceive("ticketing")
             ->andReturn($data);
 
@@ -136,7 +136,7 @@ class HostToHostTest extends TestCase
 
         $data = [ "confirm" => true ];
         
-        $this->mock(\App\Actions\Transaction\HostToHost\CancelAction::class)
+        $this->mock(\App\Actions\Transaction\Hosttohost\CancelAction::class)
             ->shouldReceive("cancel")
             ->andReturn($data);
 

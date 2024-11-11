@@ -2,7 +2,7 @@
 
 namespace App\Contracts;
 
-interface HostToHostInterface
+interface HosttohostInterface
 {
     public function search($request) : array;
     public function fare($request) : array;
