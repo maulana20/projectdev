@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Casts\InterfaceSession;
 
 class Itf extends Model
 {
@@ -20,6 +21,13 @@ class Itf extends Model
         "using",
         "session",
     ];
+
+    protected function casts(): array
+    {
+        return [
+            "session" => InterfaceSession::class,
+        ];
+    }
 
     public function hosttohost()
     {

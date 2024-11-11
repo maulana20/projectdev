@@ -7,7 +7,7 @@ use App\Contracts\HosttohostInterface;
 
 class LionService extends HosttohostAbstract implements HosttohostInterface
 {
-    public function createClient()
+    protected function createClient() : void
     {}
 
     protected function loginClient($interface)

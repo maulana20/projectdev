@@ -6,10 +6,9 @@ use App\Abstracts\HostToHostAbstract;
 
 class HandleAirAsiaService extends HostToHostAbstract
 {
-    public function createClient()
+    protected function createClient() : void
     {
-        $client = new \GuzzleHttp\Client();
-        return $client;
+        $this->client = new \GuzzleHttp\Client();
     }
 
     protected function loginClient($interface) : void
