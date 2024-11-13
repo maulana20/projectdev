@@ -20,4 +20,11 @@ class HosttohostFactory extends Factory
             "status"      => StatusEnum::ACTIVE,
         ];
     }
+
+    public function queue(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            "identifier"  => IdentifierEnum::LION,
+        ]);
+    }
 }
