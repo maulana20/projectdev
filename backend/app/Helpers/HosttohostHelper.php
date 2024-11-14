@@ -2,7 +2,11 @@
 
 namespace App\Helpers;
 
+use Exception;
+
 use App\Enums\Hosttohost\IdentifierEnum;
+use App\Enums\StatusEnum;
+use App\Models\Hosttohost;
 use App\Services\Hosttohost\AirAsiaService;
 use App\Services\Hosttohost\LionService;
 
@@ -31,11 +35,18 @@ class HosttohostHelper
     public function __construct($hosttohost_identifier = null)
     {
         $this->hosttohost_identifier = is_null($hosttohost_identifier) ? $this->identifierByPath() : $hosttohost_identifier;
-        if (!array_key_exists($this->hosttohost_identifier, static::HOSTTOHOSTS)) throw new \Exception("hostohost not exists.");
+        if (!array_key_exists($this->hosttohost_identifier, static::HOSTTOHOSTS)) throw new Exception("hostohost not exists.");
     }
 
     public function getService()
     {
         return static::HOSTTOHOSTS[$this->hosttohost_identifier];
+    }
+
+    public function getHosttohost()
+    {
+        $hosttohost = Hosttohost::identifier($this->hosttohost_identifier)->first();
+        if ($hosttohost->status === StatusEnum::INACTIVE) throw new Exception($hosttohost->description);
+        return $hosttohost;
     }
 }

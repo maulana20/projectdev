@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\StatusEnum;
+use App\Enums\UsingEnum;
 
 return new class extends Migration
 {
@@ -15,8 +17,10 @@ return new class extends Migration
             $table->string("username", 50);
             $table->string("password", 50);
             $table->string("url");
-            $table->integer("using")->default(0);
+            $table->integer("last_use")->nullable();
+            $table->boolean("using")->default(UsingEnum::NO);
             $table->string("session", 100)->nullable();
+            $table->boolean("status")->default(StatusEnum::INACTIVE);
             $table->timestamps();
         });
     }

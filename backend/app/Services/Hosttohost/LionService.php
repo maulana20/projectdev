@@ -7,6 +7,8 @@ use App\Contracts\HosttohostInterface;
 
 class LionService extends HosttohostAbstract implements HosttohostInterface
 {
+    protected $queue = true;
+
     protected function createClient() : void
     {}
 

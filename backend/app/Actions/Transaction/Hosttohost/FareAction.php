@@ -2,21 +2,14 @@
 
 namespace App\Actions\Transaction\Hosttohost;
 
-use App\Helpers\HosttohostHelper;
-
-class FareAction
+class FareAction extends BaseAction
 {
-    protected $service;
-
-    public function __construct(HosttohostHelper $hosthostHelper)
-    {
-        $service = $hosthostHelper->getService();
-        $this->service = new $service();
-    }
-
     public function fare($data)
     {
-        $this->service->start("interface");
-        return $this->service->fare($data);
+        if ($this->service->queue) $this->itfUsingRepository->take($this->interface); 
+        $this->service->start($this->interface);
+        $result = $this->service->fare($data);
+        $this->itfUsingRepository->release($this->interface);
+        return $result;
     }
 }

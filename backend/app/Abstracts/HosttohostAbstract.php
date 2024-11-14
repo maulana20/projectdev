@@ -8,6 +8,8 @@ abstract class HosttohostAbstract
 {
     protected $client;
 
+    protected $queue = false;
+
     abstract protected function createClient() : void;
     abstract protected function loginClient($interface) : void;
     abstract protected function logoutClient() : void;
