@@ -3,14 +3,15 @@
 namespace App\Pipelines;
 
 use Closure;
-use Log;
+
+use App\Enums\Reason\CodeEnum;
 
 class ItfUsingNoQueuePipeline
 {
     public function __invoke($hosttohost, Closure $next)
     {
         $interface  = $hosttohost->interfaces()->active()->first();
-        if (!$interface) Log::info("critical", [ "hosttohost" => $hosttohost->name ]);
+        if (!$interface) $hosttohost->traffics()->create([ "reason_code" => CodeEnum::CRITICAL ]);
         return $next($interface);
     }
 }

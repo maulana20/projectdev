@@ -29,4 +29,11 @@ class ItfFactory extends Factory
             "last_use"      => time() - 360,
         ]);
     }
+
+    public function traffic(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            "last_use"      => time(),
+        ]);
+    }
 }
