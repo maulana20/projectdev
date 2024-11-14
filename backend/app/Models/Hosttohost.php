@@ -25,6 +25,11 @@ class Hosttohost extends Model
         return $this->hasMany("App\Models\Itf");
     }
 
+    public function traffics()
+    {
+        return $this->hasMany("App\Models\Traffic");
+    }
+
     public function scopeIdentifier($query, $data)
     {
         return $query->where("identifier", $data);

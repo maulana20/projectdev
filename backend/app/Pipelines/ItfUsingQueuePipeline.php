@@ -3,11 +3,8 @@
 namespace App\Pipelines;
 
 use Closure;
-use Log;
 
-use App\Enums\StatusEnum;
-use App\Helpers\HosttohostHelper;
-use App\Models\Hosttohost;
+use App\Enums\Reason\CodeEnum;
 
 class ItfUsingQueuePipeline
 {
@@ -18,12 +15,12 @@ class ItfUsingQueuePipeline
         while (is_null($interface)) {
             $i++;
             if ($i >= 15) {
-                Log::info("critical", [ "hosttohost" => $hosttohost->name ]);
+                $hosttohost->traffics()->create([ "reason_code" => CodeEnum::CRITICAL ]);
                 break;
             }
             $interface = $hosttohost->interfaces()->free()->active()->first();
             if (is_null($interface) && $i === 2) {
-                Log::info("critical", [ "hosttohost" => $hosttohost->name ]);
+                $hosttohost->traffics()->create([ "reason_code" => CodeEnum::WARNING ]);
                 sleep(2);
             }
         }

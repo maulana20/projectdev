@@ -49,4 +49,18 @@ class HosttohostInterfaceTest extends TestCase
             \Illuminate\Support\Arr::only($pipeline->toArray(), $only)
         );
     }
+
+    public function test_check_itf_using_queue_traffic_pipeline(): void
+    {
+        $interface = \App\Models\Itf::factory()->queue()->traffic()->create();
+        try {
+            \Illuminate\Support\Facades\Pipeline::send($interface->hosttohost)
+                ->through([
+                    \App\Pipelines\ItfUsingQueuePipeline::class
+                ])
+                ->thenReturn();
+        } catch (\Exception $e) {
+            $this->assertSame($e->getMessage(), "critical issue");
+        }
+    }
 }

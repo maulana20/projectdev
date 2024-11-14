@@ -13,6 +13,11 @@ $ cd db
 $ cp .env.example  .env
 ```
 
+seeder
+```
+$ php artisan db:seed
+```
+
 unit test
 ```
 $ php artisan test

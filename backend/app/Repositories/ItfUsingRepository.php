@@ -10,7 +10,7 @@ use App\Enums\UsingEnum;
 
 class ItfUsingRepository
 {
-    protected function free($queue = false)
+    public function free($queue = false)
     {
         $hosttohost = (new HosttohostHelper(request()->hosttohost_interface))->getHosttohost();
         return Pipeline::send($hosttohost)
@@ -18,7 +18,7 @@ class ItfUsingRepository
             ->thenReturn();
     }
 
-    protected function take($interface)
+    public function take($interface)
     {
         $interface->update([
             "using"    => UsingEnum::YES,
@@ -26,7 +26,7 @@ class ItfUsingRepository
         ]);
     }
 
-    protected function release($interface)
+    public function release($interface)
     {
         $interface->update([
             "using"    => UsingEnum::NO,
