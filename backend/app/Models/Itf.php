@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 use App\Casts\InterfaceSession;
 use App\Enums\StatusEnum;
 use App\Enums\UsingEnum;
@@ -40,15 +41,18 @@ class Itf extends Model
 
     public function scopeActive($query)
     {
-        $query->where("status", StatusEnum::ACTIVE);
-        $query->orderBy("last_use", "ASC");
-        return $query;
+        return $query->where("status", StatusEnum::ACTIVE);
+    }
+
+    public function scopeOrderUsedAt($query)
+    {
+        return $query->orderBy("used_at", "ASC");
     }
 
     public function scopeFree($query)
     {
         $query->where("using", UsingEnum::NO);
-        $query->where("last_use", "<", time() - 120);
+        $query->where("used_at", "<", Carbon::now()->subMinutes(2))->orWhere("used_at", null);
         return $query;
     }
 }

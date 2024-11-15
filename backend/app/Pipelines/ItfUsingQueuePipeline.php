@@ -18,7 +18,7 @@ class ItfUsingQueuePipeline
                 $hosttohost->traffics()->create([ "reason_code" => CodeEnum::CRITICAL ]);
                 break;
             }
-            $interface = $hosttohost->interfaces()->free()->active()->first();
+            $interface = $hosttohost->interfaces()->free()->active()->orderUsedAt()->first();
             if (is_null($interface) && $i === 2) {
                 $hosttohost->traffics()->create([ "reason_code" => CodeEnum::WARNING ]);
                 sleep(2);

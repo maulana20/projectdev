@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 use App\Enums\StatusEnum;
 use App\Models\Hosttohost;
 
@@ -26,14 +27,14 @@ class ItfFactory extends Factory
         return $this->state(fn (array $attributes) => [
             "hosttohost_id" => Hosttohost::factory()->queue()->create()->id,
             "url"           => "https://www.lion.com",
-            "last_use"      => time() - 360,
+        //  "used_at"       => Carbon::now()->subMinutes(3), conditional check under minutes, already handle condition nullable value
         ]);
     }
 
     public function traffic(): static
     {
         return $this->state(fn (array $attributes) => [
-            "last_use"      => time(),
+            "used_at"       => Carbon::now(),
         ]);
     }
 }

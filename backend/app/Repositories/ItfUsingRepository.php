@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\Pipeline;
+use Carbon\Carbon;
 use App\Helpers\HosttohostHelper;
 use App\Pipelines\ItfUsingNoQueuePipeline;
 use App\Pipelines\ItfUsingQueuePipeline;
@@ -22,7 +23,7 @@ class ItfUsingRepository
     {
         $interface->update([
             "using"    => UsingEnum::YES,
-            "last_use" => time(),
+            "used_at" => Carbon::now(),
         ]);
     }
 
@@ -30,7 +31,7 @@ class ItfUsingRepository
     {
         $interface->update([
             "using"    => UsingEnum::NO,
-            "last_use" => time(),
+            "last_use" => Carbon::now(),
         ]);
     }
 }

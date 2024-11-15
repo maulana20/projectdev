@@ -7,10 +7,10 @@ $ docker-compose -f .\docker-compose.dev.yml build
 $ docker-compose -f .\docker-compose.dev.yml up -d
 ```
 
-copy db .env from example
+copy db
 ```
 $ cd db
-$ cp .env.example  .env
+$ cp .env.example .env
 ```
 
 seeder
@@ -23,7 +23,7 @@ unit test
 $ php artisan test
 ```
 
-document api swagger-ui
+swagger-ui
 ```
 http://localhost/doc
 ```
