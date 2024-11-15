@@ -17,6 +17,6 @@ class BaseAction
     {
         $service = $hosthostHelper->getService();
         $this->service = new $service();
-        $this->interface = $this->itfUsingRepository->free($this->sevice->queue);
+        $this->interface = $this->itfUsingRepository->free($this->service->queue);
     }
 }
