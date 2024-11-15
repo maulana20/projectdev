@@ -4,8 +4,10 @@ namespace Tests\TestClasses;
 
 use App\Abstracts\HostToHostAbstract;
 
-class HandleAirAsiaService extends HostToHostAbstract
+class HandleLionService extends HostToHostAbstract
 {
+    public $queue = true;
+
     protected function createClient() : void
     {
         $this->client = new \GuzzleHttp\Client();

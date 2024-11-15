@@ -21,10 +21,10 @@ class Itf extends Model
         "username",
         "password",
         "url",
-        "last_use",
         "using",
         "session",
-        "status"
+        "status",
+        "used_at",
     ];
 
     protected function casts(): array

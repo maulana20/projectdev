@@ -22,7 +22,7 @@ class ItfUsingRepository
     public function take($interface)
     {
         $interface->update([
-            "using"    => UsingEnum::YES,
+            "using"   => UsingEnum::YES,
             "used_at" => Carbon::now(),
         ]);
     }
@@ -30,8 +30,8 @@ class ItfUsingRepository
     public function release($interface)
     {
         $interface->update([
-            "using"    => UsingEnum::NO,
-            "last_use" => Carbon::now(),
+            "using"   => UsingEnum::NO,
+            "used_at" => Carbon::now(),
         ]);
     }
 }
