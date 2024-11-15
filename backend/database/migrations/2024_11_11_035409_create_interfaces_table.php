@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string("username", 50);
             $table->string("password", 50);
             $table->string("url");
-            $table->integer("last_use")->nullable();
             $table->boolean("using")->default(UsingEnum::NO);
             $table->string("session", 100)->nullable();
             $table->boolean("status")->default(StatusEnum::INACTIVE);
+            $table->timestamp("used_at")->nullable();
             $table->timestamps();
         });
     }
