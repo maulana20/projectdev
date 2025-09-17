@@ -1,4 +1,4 @@
-# ticket-reservation-backend
+# backend
 
 copy .env from example
 ```
@@ -9,3 +9,5 @@ insert data seed
 ```
 $ php artisan db:seed
 ```
+
+add pem file !important

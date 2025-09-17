@@ -34,6 +34,20 @@ services:
       - db
     networks:
       - app-network
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: projectdev/frontend:local
+    restart: unless-stopped
+    volumes:
+      - ./frontend/:/app
+      - /app/node_modules
+    depends_on:
+      - db
+      - backend
+    networks:
+      - app-network
   swagger-ui:
     image: nginx:1.21.0-alpine
     logging:
@@ -47,6 +61,7 @@ services:
     depends_on:
       - db
       - backend
+      - frontend
     networks:
       - app-network
   proxy:
@@ -63,6 +78,7 @@ services:
     depends_on:
       - db
       - backend
+      - frontend
       - swagger-ui
     networks:
       - app-network
